@@ -1,0 +1,15 @@
+# Shulker Preview Plugin
+# Download releases - github.com/awokens/shulkerpreview/releases
+# Contact on Discord - Awokens
+
+# Toggle the ability to edit shulkers when previewing
+toggle-shulker-edits: true
+
+# Assign the ability to preview shulkers through a permission
+# - Vault compatible (e.g. Luckperms)
+shulker-preview-permission: ""  # Leave empty if no permission required
+shulker-preview-permission-message: "&cNo permission to preview shulkers"  # Can be left empty for no permission messages
+
+# Admin stuff
+config-reload-permission: ""  # Leave empty if no permission required
+config-reload-permission-message: "&cNo permission to reload ShulkerPreview config"  # Can be left empty for no permission messages
