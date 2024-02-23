@@ -2,7 +2,7 @@ name: ShulkerPreview
 version: '${version}'
 main: com.github.awokens.shulkerpreview.ShulkerPreview
 api-version: '1.20'
-prefix: ["ShulkerPreview"]
+prefix: [ShulkerPreview]
 authors: [Awokens]
 description:  A server-based shulker preview plugin that lets you inspect shulkers from your.
 website: https://github.com/Awokens
