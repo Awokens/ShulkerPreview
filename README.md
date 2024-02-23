@@ -11,7 +11,7 @@ Shulker Preview provides a permission-based system for exclusive usage. It is co
 
 ### Config
 
-```access transformers
+```yaml
 # Shulker Preview Plugin
 # Download releases - github.com/awokens/shulkerpreview/releases
 # Contact on Discord - Awokens
