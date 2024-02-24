@@ -2,12 +2,14 @@ package com.github.awokens.shulkerpreview.Commands;
 
 
 import com.github.awokens.shulkerpreview.ShulkerPreview;
+import com.github.awokens.shulkerpreview.Utils.Format;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.annotations.*;
 import dev.jorel.commandapi.exceptions.WrapperCommandSyntaxException;
 import io.papermc.paper.plugin.configuration.PluginMeta;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Color;
 import org.bukkit.command.CommandSender;
 
@@ -27,12 +29,12 @@ public class ShulkerPreviewCommand {
         String authors = String.join(", ", pluginMeta.getAuthors());
         String website = pluginMeta.getWebsite();
 
-        final Component content = MiniMessage.miniMessage().deserialize(
-                "\nShulker Preview"
-                + "\nAPIVersion: " + APIVersion
-                + "\nDescription: " + Description
-                + "\nAuthors: " + authors
-                + "\nSource: " + website
+        Component content = Format.Color(
+                "\n&bShulker Preview"
+                + "\nAPIVersion: &a" + APIVersion
+                + "\nAuthors: &a" + authors
+                + "\nSource: &a" + website
+                + "\nDescription: &a" + Description
                 + "\n"
         );
         sender.sendMessage(content);
@@ -48,13 +50,9 @@ public class ShulkerPreviewCommand {
         }
 
         if (ShulkerPreview.getShulkerConfig().reloadConfig()) {
-            sender.sendMessage(
-                    Component.text(Color.RED + "Successfully reload ShulkerPreview config.yml")
-            );
+            sender.sendMessage(Format.Color("&aSuccessfully reload ShulkerPreview config.yml"));
         } else {
-            sender.sendMessage(
-                    Component.text(Color.RED + "Failed to reload ShulkerPreview config.yml")
-            );
+            sender.sendMessage(Format.Color("&cFailed to reload ShulkerPreview config.yml"));
         }
 
     }

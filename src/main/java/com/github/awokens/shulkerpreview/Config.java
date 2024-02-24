@@ -27,6 +27,8 @@ public class Config {
                 config.set("shulker-preview-permission",  "");
                 config.set("shulker-preview-permission-message", "&cNo permission to preview shulkers");
                 config.set("config-reload-permission-message", "&cNo permission to reload ShulkerPreview config");
+
+                config.save(configFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -38,6 +40,7 @@ public class Config {
             return true;
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
+            createConfig();
             return false;
         }
     }

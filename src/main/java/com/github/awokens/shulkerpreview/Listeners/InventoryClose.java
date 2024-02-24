@@ -29,11 +29,18 @@ public class InventoryClose implements Listener {
 
         if (event.getInventory().getType() != InventoryType.SHULKER_BOX) return;
 
+
+        if (!player.hasMetadata("shulker-reason")) return;
+
         String reason = player.getMetadata("shulker-reason").get(0).asString();
 
         if (!reason.equalsIgnoreCase("virtual")) return;
 
+        if (!player.hasMetadata("shulker-id")) return;
+
         String player_identifier = player.getMetadata("shulker-id").get(0).asString();
+
+
 
         ItemStack mainHand = player.getInventory().getItemInMainHand();
         PersistentDataContainer container = mainHand.getItemMeta().getPersistentDataContainer();
@@ -62,7 +69,7 @@ public class InventoryClose implements Listener {
         player.getInventory().setItemInMainHand(mainHand);
 
         player.playSound(
-                player, Sound.BLOCK_SHULKER_BOX_CLOSE, 1, 1
+                player, Sound.BLOCK_SHULKER_BOX_CLOSE, 0.25F, 1F
         );
 
         player.setCooldown(mainHand.getType(), 10);

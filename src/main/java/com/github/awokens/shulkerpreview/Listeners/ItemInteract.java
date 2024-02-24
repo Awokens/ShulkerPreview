@@ -24,15 +24,15 @@ public class ItemInteract implements Listener {
 
     @EventHandler
     public void Click(PlayerInteractEvent event) {
-        if (!event.getAction().isLeftClick()
-                || !event.hasItem()
-                || event.getClickedBlock() instanceof ShulkerBox
-        ) return;
+
+
 
         Player player = event.getPlayer();
+        if (!event.getAction().isLeftClick()
+                || !event.hasItem()
+                || !player.isSneaking()
+        ) return;
         ItemStack item = player.getInventory().getItemInMainHand();
-
-//        if (!player.getInventory().getItemInMainHand().equals(event.getItem())) return;
 
         if (!(item.getItemMeta() instanceof BlockStateMeta blockStateMeta)) return;
 
@@ -67,7 +67,7 @@ public class ItemInteract implements Listener {
 
         player.openInventory(shulkerInventory);
         player.playSound(
-                player, Sound.BLOCK_SHULKER_BOX_OPEN, 1, 1
+                player, Sound.BLOCK_SHULKER_BOX_OPEN, 0.25F, 1F
         );
 
 
