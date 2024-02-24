@@ -10,7 +10,6 @@ public class Config {
     private File configFile;
 
     private YamlConfiguration config;
-
     public Config(File dataFolder) {
         this.configFile = new File(dataFolder, "config.yml");
         this.config = new YamlConfiguration();
@@ -27,20 +26,27 @@ public class Config {
                 config.set("toggle-shulker-edits", true);
                 config.set("shulker-preview-permission",  "");
                 config.set("shulker-preview-permission-message", "&cNo permission to preview shulkers");
-                config.set("config-reload-permission", "");
                 config.set("config-reload-permission-message", "&cNo permission to reload ShulkerPreview config");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-    private void loadConfig() {
+    private boolean loadConfig() {
         try {
             config.load(configFile);
+            return true;
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
+            return false;
         }
     }
+
+    // reload config
+    public boolean reloadConfig() {
+        return loadConfig();
+    }
+
     public String getConfigValue(String path) {
         if (config != null) {
             return config.getString(path);
@@ -58,10 +64,6 @@ public class Config {
 
     public String getShulkerPreviewPermissionMessage() {
         return getConfigValue("shulker-preview-permission-message");
-    }
-
-    public String getConfigReloadPermission() {
-        return getConfigValue("config-reload-permission");
     }
 
     public String  getConfigReloadPermissionMessage() {

@@ -1,5 +1,7 @@
 package com.github.awokens.shulkerpreview;
 
+import co.aikar.commands.PaperCommandManager;
+import com.github.awokens.shulkerpreview.Commands.ShulkerPreviewCommand;
 import com.github.awokens.shulkerpreview.Listeners.*;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,6 +12,7 @@ public final class ShulkerPreview extends JavaPlugin {
 
     public static Config config;
     private static ShulkerPreview instance;
+
 
     public static ShulkerPreview getInstance() {
         return instance;
@@ -27,9 +30,12 @@ public final class ShulkerPreview extends JavaPlugin {
         config = new Config(getDataFolder());
 
         PluginManager manager = getServer().getPluginManager();
+        PaperCommandManager commandManager = new PaperCommandManager(this);
 
-        // Listeners
+        // Registering events and commands
         try {
+            // Registering events
+            getLogger().log(Level.INFO, "Registering events");
             manager.registerEvents(new EntityDamage(), this);
             manager.registerEvents(new HandSwapItem(), this);
             manager.registerEvents(new InventoryClick(), this);
@@ -38,15 +44,16 @@ public final class ShulkerPreview extends JavaPlugin {
             manager.registerEvents(new ItemHandSwap(), this);
             manager.registerEvents(new ItemInteract(), this);
             manager.registerEvents(new PlaceBlock(), this);
+
+            // Registering commands
+            getLogger().log(Level.INFO, "Registering commands");
+            commandManager.registerCommand(new ShulkerPreviewCommand());
+
         } catch (Exception e) {
             e.printStackTrace();
             getServer().getPluginManager().disablePlugin(this);
         }
-
         getLogger().log(Level.INFO, "Loaded plugin");
-
-
-
 
     }
 

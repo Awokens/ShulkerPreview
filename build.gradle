@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'com.github.awokens'
@@ -15,10 +16,22 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven {
+        name = "aikar"
+        url = "https://repo.aikar.co/content/groups/aikar/"
+    }
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
+    // aikar command api
+    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
+
+}
+
+shadowJar {
+    relocate('co.aikar.commands', 'com.github.awokens.acf')
+    relocate('co.aikar.locales', 'com.github.awokens.locales')
 }
 
 def targetJavaVersion = 17
