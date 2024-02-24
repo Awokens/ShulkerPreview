@@ -17,21 +17,24 @@ repositories {
         url = "https://oss.sonatype.org/content/groups/public/"
     }
     maven {
-        name = "aikar"
-        url = "https://repo.aikar.co/content/groups/aikar/"
+        name = "codemc"
+        url = "https://repo.codemc.org/repository/maven-public/"
     }
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
-    // aikar command api
-    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
-
+//    compileOnly "dev.jorel:commandapi-bukkit-core:9.3.0"
+    compileOnly "dev.jorel:commandapi-annotations:9.3.0"
 }
 
 shadowJar {
-    relocate('co.aikar.commands', 'com.github.awokens.acf')
-    relocate('co.aikar.locales', 'com.github.awokens.locales')
+    dependencies {
+        include dependency("dev.jorel:commandapi-bukkit-shade:9.3.0")
+    }
+
+    // TODO: Change this to my own package name
+    relocate("dev.jorel.commandapi", "com.github.awokens.commandapi")
 }
 
 def targetJavaVersion = 17

@@ -1,8 +1,8 @@
 package com.github.awokens.shulkerpreview;
 
-import co.aikar.commands.PaperCommandManager;
-import com.github.awokens.shulkerpreview.Commands.ShulkerPreviewCommand;
 import com.github.awokens.shulkerpreview.Listeners.*;
+import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,14 +23,24 @@ public final class ShulkerPreview extends JavaPlugin {
     }
 
     @Override
+    public void onLoad() {
+        CommandAPI.onLoad(new CommandAPIBukkitConfig(this).verboseOutput(true));
+
+        CommandAPI.registerCommand(ShulkerPreview.class);
+    }
+
+    @Override
     public void onEnable() {
         // Plugin startup logic
+
+        CommandAPI.onEnable();
 
         instance = this;
         config = new Config(getDataFolder());
 
+
         PluginManager manager = getServer().getPluginManager();
-        PaperCommandManager commandManager = new PaperCommandManager(this);
+
 
         // Registering events and commands
         try {
@@ -47,7 +57,6 @@ public final class ShulkerPreview extends JavaPlugin {
 
             // Registering commands
             getLogger().log(Level.INFO, "Registering commands");
-            commandManager.registerCommand(new ShulkerPreviewCommand());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,6 +69,10 @@ public final class ShulkerPreview extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        CommandAPI.onDisable();
+
+
         getLogger().log(Level.INFO, "Disabling ShulkerPreview");
+
     }
 }
