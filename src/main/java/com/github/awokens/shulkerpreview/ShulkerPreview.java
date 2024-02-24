@@ -1,5 +1,6 @@
 package com.github.awokens.shulkerpreview;
 
+import com.github.awokens.shulkerpreview.Commands.ShulkerPreviewCommand;
 import com.github.awokens.shulkerpreview.Listeners.*;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
@@ -26,7 +27,7 @@ public final class ShulkerPreview extends JavaPlugin {
     public void onLoad() {
         CommandAPI.onLoad(new CommandAPIBukkitConfig(this).verboseOutput(true));
 
-        CommandAPI.registerCommand(ShulkerPreview.class);
+        CommandAPI.registerCommand(ShulkerPreviewCommand.class);
     }
 
     @Override
