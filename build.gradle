@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'com.github.awokens'
@@ -24,15 +24,25 @@ repositories {
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
-//    compileOnly "dev.jorel:commandapi-bukkit-core:9.3.0"
-    compileOnly "dev.jorel:commandapi-annotations:9.3.0"
+    compileOnly 'dev.jorel:commandapi-annotations:9.3.0'
+    annotationProcessor 'dev.jorel:commandapi-annotations:9.3.0'
+    implementation "dev.jorel:commandapi-bukkit-shade:9.3.0"
 }
 
 shadowJar {
     dependencies {
         include dependency("dev.jorel:commandapi-bukkit-shade:9.3.0")
     }
-    relocate("dev.jorel.commandapi", "com.github.awokens.commandapi")
+    relocate("dev.jorel.commandapi", "com.github.awokens.shulkerpreview.api.commandapi")
+}
+
+
+// Run task to build jar to another spot
+tasks.register('server', Copy) {
+    from shadowJar
+    // Change this to wherever you want your jar to build
+    // mac directory
+    into '/users/isaiahrodriguez/desktop/paper-1.20.4/plugins'
 }
 
 def targetJavaVersion = 17

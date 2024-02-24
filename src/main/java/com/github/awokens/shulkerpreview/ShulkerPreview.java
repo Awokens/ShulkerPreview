@@ -26,8 +26,6 @@ public final class ShulkerPreview extends JavaPlugin {
     @Override
     public void onLoad() {
         CommandAPI.onLoad(new CommandAPIBukkitConfig(this).verboseOutput(true));
-
-        CommandAPI.registerCommand(ShulkerPreviewCommand.class);
     }
 
     @Override
@@ -35,6 +33,8 @@ public final class ShulkerPreview extends JavaPlugin {
         // Plugin startup logic
 
         CommandAPI.onEnable();
+
+        CommandAPI.registerCommand(ShulkerPreviewCommand.class);
 
         instance = this;
         config = new Config(getDataFolder());
