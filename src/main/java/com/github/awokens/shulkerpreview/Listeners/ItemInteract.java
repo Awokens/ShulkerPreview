@@ -14,6 +14,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.UUID;
@@ -28,16 +30,17 @@ public class ItemInteract implements Listener {
         ) return;
 
         Player player = event.getPlayer();
-        ItemStack item = event.getItem();
+        ItemStack item = player.getInventory().getItemInMainHand();
 
-        if (!player.getInventory().getItemInMainHand().equals(item)) return;
+//        if (!player.getInventory().getItemInMainHand().equals(event.getItem())) return;
 
         if (!(item.getItemMeta() instanceof BlockStateMeta blockStateMeta)) return;
+
         if (!(blockStateMeta.getBlockState() instanceof ShulkerBox shulkerBox)) return;
 
         if (player.getCooldown(item.getType()) > 0) return;
 
-        if (!player.getOpenInventory().title().contains(
+        if (player.getOpenInventory().title().contains(
                 Component.text(player.getName() + "'s shulker box")
         )) return;
 
@@ -54,12 +57,25 @@ public class ItemInteract implements Listener {
 
         NamespacedKey key = new NamespacedKey(ShulkerPreview.getInstance(), "shulker-id");
 
-        item.getItemMeta().getPersistentDataContainer().set(key, PersistentDataType.STRING, identifier);
+
+        ItemMeta meta = item.getItemMeta();
+        meta.getPersistentDataContainer().set(
+                key, PersistentDataType.STRING, identifier
+        );
+
+        item.setItemMeta(meta);
 
         player.openInventory(shulkerInventory);
         player.playSound(
                 player, Sound.BLOCK_SHULKER_BOX_OPEN, 1, 1
         );
+
+
+        FixedMetadataValue reason = new FixedMetadataValue(ShulkerPreview.getInstance(), "virtual");
+        player.setMetadata("shulker-reason", reason);
+
+        FixedMetadataValue id = new FixedMetadataValue(ShulkerPreview.getInstance(), identifier);
+        player.setMetadata("shulker-id", id);
 
 
     }

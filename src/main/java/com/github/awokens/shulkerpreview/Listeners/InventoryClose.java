@@ -1,6 +1,7 @@
 package com.github.awokens.shulkerpreview.Listeners;
 
 import com.github.awokens.shulkerpreview.ShulkerPreview;
+import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.block.ShulkerBox;
@@ -19,6 +20,7 @@ public class InventoryClose implements Listener {
     @EventHandler
     public void Close(InventoryCloseEvent event) {
 
+
         if (!(event.getPlayer() instanceof Player player)) return;
 
         if (!player.hasPermission(
@@ -27,9 +29,11 @@ public class InventoryClose implements Listener {
 
         if (event.getInventory().getType() != InventoryType.SHULKER_BOX) return;
 
-        if (!player.getMetadata("shulker-reason").toString().equalsIgnoreCase("virtual")) return;
+        String reason = player.getMetadata("shulker-reason").get(0).asString();
 
-        String player_identifier = player.getMetadata("shulker-id").toString();
+        if (!reason.equalsIgnoreCase("virtual")) return;
+
+        String player_identifier = player.getMetadata("shulker-id").get(0).asString();
 
         ItemStack mainHand = player.getInventory().getItemInMainHand();
         PersistentDataContainer container = mainHand.getItemMeta().getPersistentDataContainer();
@@ -43,6 +47,7 @@ public class InventoryClose implements Listener {
         player.removeMetadata("shulker-reason", ShulkerPreview.getInstance());
 
         if (!(mainHand.getItemMeta() instanceof BlockStateMeta blockStateMeta)) return;
+
         if (!(blockStateMeta.getBlockState() instanceof ShulkerBox shulkerBox)) return;
 
         shulkerBox.getInventory().setContents(
