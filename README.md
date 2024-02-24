@@ -1,6 +1,6 @@
-# SHULKER PREVIEW v0.6
+# SHULKER PREVIEW v0.7
 
-This plugin enables players to preview their shulker boxes by  sneaking and left-clicking a shulker box as their selected hotbar item. Additionally, players can edit the shulker box, close it, and have the content saved to the corresponding held item.
+This plugin enables players to preview their shulker boxes by sneaking and left-clicking a shulker box as their selected hotbar item. Additionally, players can edit the shulker box, close it, and have the content saved to the corresponding held item.
 
 Shulker Preview provides a permission-based system for exclusive usage. It is compatible with  popular plugins like  Luckperms, utilizing Vault to facilitate the connection.
 
