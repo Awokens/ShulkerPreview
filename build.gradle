@@ -32,8 +32,6 @@ shadowJar {
     dependencies {
         include dependency("dev.jorel:commandapi-bukkit-shade:9.3.0")
     }
-
-    // TODO: Change this to my own package name
     relocate("dev.jorel.commandapi", "com.github.awokens.commandapi")
 }
 
