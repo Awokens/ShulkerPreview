@@ -30,11 +30,11 @@ public class ShulkerPreviewCommand {
         String website = pluginMeta.getWebsite();
 
         Component content = Format.Color(
-                "\n&bShulker Preview"
+                "\n&bShulker &3Preview"
                 + "\nAPIVersion: &a" + APIVersion
                 + "\nAuthors: &a" + authors
                 + "\nSource: &a" + website
-                + "\nDescription: &a" + Description
+                + "\nDescription: &6" + Description
                 + "\n"
         );
         sender.sendMessage(content);

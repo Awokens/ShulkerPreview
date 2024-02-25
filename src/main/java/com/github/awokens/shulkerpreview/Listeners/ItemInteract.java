@@ -25,8 +25,6 @@ public class ItemInteract implements Listener {
     @EventHandler
     public void Click(PlayerInteractEvent event) {
 
-
-
         Player player = event.getPlayer();
         if (!event.getAction().isLeftClick()
                 || !event.hasItem()
@@ -67,7 +65,7 @@ public class ItemInteract implements Listener {
 
         player.openInventory(shulkerInventory);
         player.playSound(
-                player, Sound.BLOCK_SHULKER_BOX_OPEN, 0.25F, 1F
+                player, Sound.BLOCK_SHULKER_BOX_OPEN, 0.5F, 1F
         );
 
 

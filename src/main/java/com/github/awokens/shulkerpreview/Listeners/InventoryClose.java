@@ -40,8 +40,6 @@ public class InventoryClose implements Listener {
 
         String player_identifier = player.getMetadata("shulker-id").get(0).asString();
 
-
-
         ItemStack mainHand = player.getInventory().getItemInMainHand();
         PersistentDataContainer container = mainHand.getItemMeta().getPersistentDataContainer();
 
